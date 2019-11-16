@@ -21,7 +21,7 @@ public class BasicErrorController extends AbstractErrorController {
 		// TODO Auto-generated constructor stub
 	}
 
-	@RequestMapping
+	@RequestMapping(produces ={ "application/json" } )
 	public ResponseEntity<CommonResponse> error(HttpServletRequest request) {
 		
 		return ResponseEntity.ok(new CommonResponse("500", "There is some error",""));
