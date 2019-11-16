@@ -16,6 +16,7 @@ import com.devlover.app.performr.model.CommonResponse;
 import com.devlover.app.performr.model.Users;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -41,13 +42,12 @@ public class IndexController
 	@PostMapping("registeruser")
 	public String registerUser(@ModelAttribute User usr ) throws IOException
 	{
-		final String uri = "http://localhost:8080/register";
 		OkHttpClient client = new OkHttpClient();
 		ObjectMapper mapper = new ObjectMapper();
 		MediaType mediaType = MediaType.parse("application/json");
 		RequestBody body = RequestBody.create(mediaType, mapper.writeValueAsString(usr));
 		Request request = new Request.Builder()
-		  .url("http://performrweb.azurewebsites.net/register")
+		  .url("http://localhost:8080/register")
 		  .post(body)
 		  .addHeader("Content-Type", "application/json")
 		  .addHeader("Accept", "*/*")
@@ -60,8 +60,7 @@ public class IndexController
 		  .build();
 
 		Response response = client.newCall(request).execute();
-		CommonResponse user = mapper.readValue(response.body().string(), CommonResponse.class);
-		
+	CommonResponse user=	new Gson().fromJson(response.body().string(), CommonResponse.class);
 		if(user.getCode().equals("200"))
 		{
 			return "success";
