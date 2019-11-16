@@ -47,7 +47,7 @@ public class IndexController
 		MediaType mediaType = MediaType.parse("application/json");
 		RequestBody body = RequestBody.create(mediaType, mapper.writeValueAsString(usr));
 		Request request = new Request.Builder()
-		  .url("http://performrweb.azurewebsites.net:8080/register")
+		  .url("http://performrweb.azurewebsites.net/register")
 		  .post(body)
 		  .addHeader("Content-Type", "application/json")
 		  .addHeader("Accept", "*/*")
