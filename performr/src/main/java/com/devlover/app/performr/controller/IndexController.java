@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class IndexController 
 {
-	@GetMapping("index")
+	@GetMapping({"","index"})
 		public String getLogin()
 		{
 			return "index";
@@ -18,6 +18,5 @@ public class IndexController
 	{
 		return "register";
 	}
-	
 	
 }
