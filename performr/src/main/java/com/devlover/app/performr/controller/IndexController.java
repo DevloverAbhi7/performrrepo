@@ -47,7 +47,7 @@ public class IndexController
 		MediaType mediaType = MediaType.parse("application/json");
 		RequestBody body = RequestBody.create(mediaType, mapper.writeValueAsString(usr));
 		Request request = new Request.Builder()
-		  .url("http://localhost:8080/register")
+		  .url("http://performrweb.azurewebsites.net/register")
 		  .post(body)
 		  .addHeader("Content-Type", "application/json")
 		  .addHeader("Accept", "*/*")
@@ -60,8 +60,9 @@ public class IndexController
 		  .build();
 
 		Response response = client.newCall(request).execute();
-	CommonResponse user=	new Gson().fromJson(response.body().string(), CommonResponse.class);
-		if(user.getCode().equals("200"))
+		System.out.println(response.body().string().toString()+"rafeeq");
+	CommonResponse user=	new Gson().fromJson(response.body().toString(), CommonResponse.class);
+	if(user.getCode().equals("200"))
 		{
 			return "success";
 		}
